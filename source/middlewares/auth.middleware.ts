@@ -10,13 +10,13 @@ import { Request, Response, NextFunction } from 'express';
 const getAccess = async (req: Request, res: Response, next: NextFunction) => {
     const tokenRequired = req.headers["x-access-token"];
     if (tokenRequired) {
-        jwt.verify(tokenRequired as string, process.env.SECRET_KEY_USER as string, (err, result) => {
+        jwt.verify(tokenRequired as string, process.env.SECRET_KEY_USER!, (err, result) => {
             if (result) {
-                req.params.user_id = "result";
+                req.params.user_id = "";
                 next();
             } else if (err) {
                 console.log(err);
-                res.status(406).json({ status: 406,  message: "this user is not auth" });
+                res.status(406).json({ status: 406, message: "this user is not auth" });
             }
         })
 
