@@ -10,7 +10,7 @@ export const registerUserController = async (request: Request, response: Respons
             const user = await registerUserService({ name, lastName, email, password })
 
             response.status(200).json({
-                status: 200,
+                status: 201,
                 body: user
             })
 

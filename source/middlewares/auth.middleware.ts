@@ -12,8 +12,8 @@ const getAccess = async (req: Request, res: Response, next: NextFunction) => {
     if (tokenRequired) {
         jwt.verify(tokenRequired as string, process.env.SECRET_KEY_USER as string, (err, result) => {
             if (result) {
-                console.log("result token: ", result)
-                //next();
+                req.params.user_id = "result";
+                next();
             } else if (err) {
                 console.log(err);
                 res.status(406).json({ status: 406,  message: "this user is not auth" });
