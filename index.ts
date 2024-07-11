@@ -1,5 +1,6 @@
 require('dotenv').config();
-import server from "./source/server";
+import server from "./src/server";
+
 const PORT = process.env.PORT || 8080;
 
 server.listen(PORT, () => {

@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import { loginUserService } from '../../services/auth/login.service';
+import { comparePassword } from '../../utils/bcrypt.utils';
+import { sign } from 'jsonwebtoken'
+
 
 export const loginUserController = async (request: Request, response: Response) => {
     try {
@@ -13,9 +16,22 @@ export const loginUserController = async (request: Request, response: Response) 
                 }
             })
 
-            response.status(200).json({
-                status: 200,
-                body: user
+            const isPasswordCorrect = await comparePassword(password, user.get(password))
+
+            if (!isPasswordCorrect) Promise.reject({ status: 400, message: "Credentials invalid" })
+
+            sign({ email: user.get(email) }, process.env.SECRET_KEY_USER!, { expiresIn: "1d" }, (error, tok) => {
+                if (!error && tok) {
+                    response.status(200).json({
+                        status: 200,
+                        body: {
+                            auth: true,
+                            token: tok
+                        }
+                    })
+                } else {
+                    throw new Error();
+                }
             })
 
         } else {

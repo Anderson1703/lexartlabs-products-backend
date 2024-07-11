@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { registerUserService } from '../../services/auth/register.service';
+import { encryptPassword } from '../../utils/bcrypt.utils';
 
 export const registerUserController = async (request: Request, response: Response) => {
     try {
@@ -7,11 +8,15 @@ export const registerUserController = async (request: Request, response: Respons
 
         if (name && lastName && email && password) {
 
-            const user = await registerUserService({ name, lastName, email, password })
+            const passwordEncrypt = await encryptPassword(password)
+
+            await registerUserService({ name, lastName, email, password: passwordEncrypt })
 
             response.status(200).json({
                 status: 201,
-                body: user
+                body: {
+                    message:"User registered successful"
+                }
             })
 
         } else {
