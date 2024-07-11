@@ -13,6 +13,10 @@ server.use(express.json())
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+server.get('/api-docs.json', (res: Response) => {
+    res.setHeader('Content-Type', 'application/json')
+    res.send(swaggerDocs)
+})
 
 server.use('/api', root);
 
