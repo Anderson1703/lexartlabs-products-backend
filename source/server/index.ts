@@ -1,8 +1,7 @@
 require("../database/connection/index")
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import root from '../routes/index'
 import cors from 'cors';
-import express from 'express';
 const server = express();
 
 server.use(cors());
