@@ -10,9 +10,9 @@ import { Request, Response, NextFunction } from 'express';
 const getAccess = async (req: Request, res: Response, next: NextFunction) => {
     const tokenRequired = req.headers["x-access-token"];
     if (tokenRequired) {
-        jwt.verify(tokenRequired as string, process.env.SECRET_KEY_USER!, (err, result) => {
+        jwt.verify(tokenRequired as string, process.env.SECRET_KEY_USER!, (err, result: any) => {
             if (result) {
-                req.params.user_id = ""
+                req.params.user_id = result.user.id
                 next();
             } else if (err) {
                 console.log(err);

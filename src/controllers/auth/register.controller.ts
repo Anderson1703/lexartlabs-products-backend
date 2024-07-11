@@ -15,15 +15,15 @@ export const registerUserController = async (request: Request, response: Respons
             response.status(200).json({
                 status: 201,
                 body: {
-                    message:"User registered successful"
+                    message: "User registered successful"
                 }
             })
 
         } else {
-            Promise.reject({
+            throw {
                 status: 406,
                 message: "Server is missing properties"
-            })
+            }
         }
 
     } catch (error: any) {

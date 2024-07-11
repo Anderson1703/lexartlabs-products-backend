@@ -9,6 +9,6 @@ export const loginUserService = async (options: FindOptions) => {
         });
 
     if (user === undefined) return Promise.reject({ message: 'Server error while login user' })
-    if (user === null) return Promise.reject({ message: 'User not found', status: 404 })
+    if (user === null) return Promise.reject({ message: 'Credentials invalid', status: 401 })
     return user;
 }

@@ -19,10 +19,10 @@ export const getOneUserController = async (request: Request, response: Response)
             })
 
         } else {
-            Promise.reject({
+            throw {
                 status: 406,
                 message: "Server is missing properties (user id)"
-            })
+            }
         }
 
     } catch (error: any) {

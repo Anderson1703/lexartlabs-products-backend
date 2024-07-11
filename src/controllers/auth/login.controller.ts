@@ -16,11 +16,14 @@ export const loginUserController = async (request: Request, response: Response) 
                 }
             })
 
-            const isPasswordCorrect = await comparePassword(password, user.get(password))
+            const isPasswordCorrect = await comparePassword(password, user)
 
-            if (!isPasswordCorrect) Promise.reject({ status: 400, message: "Credentials invalid" })
+            if (!isPasswordCorrect) throw {
+                status: 401,
+                message: "Credentials invalid"
+            }
 
-            sign({ email: user.get(email) }, process.env.SECRET_KEY_USER!, { expiresIn: "1d" }, (error, tok) => {
+            sign({ user: user }, process.env.SECRET_KEY_USER!, { expiresIn: "1d" }, (error, tok) => {
                 if (!error && tok) {
                     response.status(200).json({
                         status: 200,
@@ -35,10 +38,10 @@ export const loginUserController = async (request: Request, response: Response) 
             })
 
         } else {
-            Promise.reject({
+            throw {
                 status: 406,
                 message: "Server is missing properties"
-            })
+            }
         }
 
     } catch (error: any) {
