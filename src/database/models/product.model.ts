@@ -1,7 +1,7 @@
 import { DECIMAL, STRING, INTEGER, DATE } from "sequelize";
 import sequelize from "../connection";
 
-export const Product = sequelize.define("product", {
+export const Product = sequelize.define("products", {
     uuid: {
         type: STRING,
         allowNull: false,
