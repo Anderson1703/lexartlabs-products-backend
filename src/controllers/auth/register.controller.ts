@@ -1,16 +1,21 @@
 import { Request, Response } from 'express';
 import { registerUserService } from '../../services/auth/register.service';
 import { encryptPassword } from '../../utils/bcrypt.utils';
+import { RegisterUserBodyI } from '../../interfaces/auth.interface';
+import { generateUUID } from '../../utils/uuid.utils';
 
 export const registerUserController = async (request: Request, response: Response) => {
     try {
-        const { name, lastName, email, password } = request.body;
+
+        const { name, lastName, email, password }: RegisterUserBodyI = request.body;
 
         if (name && lastName && email && password) {
 
-            const passwordEncrypt = await encryptPassword(password)
+            const uuid = generateUUID();
 
-            await registerUserService({ name, lastName, email, password: passwordEncrypt })
+            const passwordEncrypt = await encryptPassword(password);
+
+            await registerUserService(uuid, { name, lastName, email, password: passwordEncrypt })
 
             response.status(200).json({
                 status: 201,

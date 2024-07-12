@@ -2,6 +2,11 @@ import { STRING } from "sequelize";
 import sequelize from "../connection";
 
 export const User = sequelize.define("User", {
+    uuid: {
+        type: STRING,
+        allowNull: false,
+        unique: true
+    },
     name: {
         type: STRING,
         allowNull: false

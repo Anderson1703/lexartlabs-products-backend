@@ -3,14 +3,16 @@ import { getOneUserService } from '../../services/users/get-one.service';
 
 export const getOneUserController = async (request: Request, response: Response) => {
     try {
-        const { user_id } = request.params;
+        
+        const { userUUID } = request.params;
 
-        if (user_id) {
+        if (userUUID) {
 
             const user = await getOneUserService({
                 where: {
-                    id: user_id
-                }
+                    uuid: userUUID
+                },
+                attributes: ["uuid", "name", "lastName", "email"]
             })
 
             response.status(200).json({
@@ -21,7 +23,7 @@ export const getOneUserController = async (request: Request, response: Response)
         } else {
             throw {
                 status: 406,
-                message: "Server is missing properties (user id)"
+                message: "Server is missing properties (user uuid)"
             }
         }
 

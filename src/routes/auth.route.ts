@@ -1,14 +1,11 @@
 import { Router } from 'express';
 import { loginUserController } from '../controllers/auth/login.controller';
 import { registerUserController } from '../controllers/auth/register.controller';
+
 const AuthRouter = Router();
 
-AuthRouter
-    .route("/login")
-    .post(loginUserController)
+AuthRouter.post("/login", loginUserController);
 
-AuthRouter
-    .route("/register")
-    .post(registerUserController)
+AuthRouter.post("/register", registerUserController);
 
 export default AuthRouter;

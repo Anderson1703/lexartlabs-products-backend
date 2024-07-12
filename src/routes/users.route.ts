@@ -4,11 +4,6 @@ import { getOneUserController } from '../controllers/users/get-one.controller';
 
 const UsersRouter = Router();
 
-UsersRouter
-    .route("/me")
-    .get(
-        getAccess,
-        getOneUserController
-    )
+UsersRouter.get("/me", getAccess, getOneUserController);
 
 export default UsersRouter;

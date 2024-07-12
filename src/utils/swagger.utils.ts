@@ -6,5 +6,5 @@ export const swaggerOptions = {
             description: 'API Information',
         }
     },
-    apis: [`${__dirname}/routes/*.ts`],
+    apis: [`src/routes/*.ts`, `src/database/models*.ts`],
 };

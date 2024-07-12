@@ -1,21 +1,15 @@
 import { User } from "../../database/models/user.model"
+import { RegisterUserBodyI } from "../../interfaces/auth.interface";
 
-interface registerUserServiceI {
-    name: string,
-    lastName: string,
-    email: string,
-    password: string
-}
+export const registerUserService = async (uuid: string, data: RegisterUserBodyI) => {
 
-export const registerUserService = async (data: registerUserServiceI) => {
-
-    const user = await User.create({ ...data }, { raw: true })
+    const user = await User.create({ uuid: uuid, ...data })
         .catch(err => {
             console.log("error on registerUserService: ", err)
             return undefined
         });
 
-    if (user === undefined) return Promise.reject({ message: 'Server error while register user' })
+    if (user === undefined) return Promise.reject({ message: 'Server error while register user' });
 
     return user;
 

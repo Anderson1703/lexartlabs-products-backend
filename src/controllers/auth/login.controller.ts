@@ -2,11 +2,12 @@ import { Request, Response } from 'express';
 import { loginUserService } from '../../services/auth/login.service';
 import { comparePassword } from '../../utils/bcrypt.utils';
 import { sign } from 'jsonwebtoken'
+import { LoginUserBodyI } from '../../interfaces/auth.interface';
 
 
 export const loginUserController = async (request: Request, response: Response) => {
     try {
-        const { email, password } = request.body;
+        const { email, password }: LoginUserBodyI = request.body;
 
         if (email && password) {
 

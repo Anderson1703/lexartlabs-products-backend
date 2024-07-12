@@ -12,7 +12,7 @@ const getAccess = async (req: Request, res: Response, next: NextFunction) => {
     if (tokenRequired) {
         jwt.verify(tokenRequired as string, process.env.SECRET_KEY_USER!, (err, result: any) => {
             if (result) {
-                req.params.user_id = result.user.id
+                req.params.userUUID = result.user.uuid
                 next();
             } else if (err) {
                 console.log(err);
