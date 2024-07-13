@@ -17,7 +17,7 @@ export const createProductController = async (request: Request, response: Respon
             response.status(200).json({
                 status: 201,
                 body: {
-                    message: "product created successful"
+                    message: "Product created successful"
                 }
             });
 
