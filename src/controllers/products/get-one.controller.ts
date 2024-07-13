@@ -17,12 +17,14 @@ export const getOneProductController = async (request: Request, response: Respon
 
             response.status(200).json({
                 status: 200,
-                body: product
+                body: {
+                    data: product
+                }
             })
 
         } else {
             throw {
-                status: 406,
+                status: 400,
                 message: "Server is missing properties (product uuid)"
             }
         }

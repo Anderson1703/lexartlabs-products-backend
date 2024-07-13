@@ -40,7 +40,7 @@ export const loginUserController = async (request: Request, response: Response) 
 
         } else {
             throw {
-                status: 406,
+                status: 400,
                 message: "Server is missing properties"
             }
         }

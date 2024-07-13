@@ -10,7 +10,7 @@ ProductsRouter.get("/", getAccess, getAllProductsController);
 
 ProductsRouter.post("/", getAccess, createProductController);
 
-ProductsRouter.post("/:productUUID", getAccess, getOneProductController);
+ProductsRouter.get("/:productUUID", getAccess, getOneProductController);
 
 
 export default ProductsRouter;

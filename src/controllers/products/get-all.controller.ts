@@ -6,6 +6,11 @@ export const getAllProductsController = async (request: Request, response: Respo
 
         const { limit, offset } = request.query
 
+        if (!limit || !offset) throw {
+            status: 400,
+            message: "Missing query parameters: limit and offset are required"
+        }
+
         const products = await getAllProductsService({
             limit: Number(limit),
             offset: Number(offset),

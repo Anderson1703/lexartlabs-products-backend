@@ -17,12 +17,14 @@ export const getOneUserController = async (request: Request, response: Response)
 
             response.status(200).json({
                 status: 200,
-                body: user
+                body: {
+                    data: user
+                }
             })
 
         } else {
             throw {
-                status: 406,
+                status: 400,
                 message: "Server is missing properties (user uuid)"
             }
         }

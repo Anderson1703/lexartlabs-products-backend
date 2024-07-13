@@ -26,7 +26,7 @@ export const registerUserController = async (request: Request, response: Respons
 
         } else {
             throw {
-                status: 406,
+                status: 400,
                 message: "Server is missing properties"
             }
         }
