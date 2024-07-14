@@ -24,8 +24,6 @@ export const getAllProductsController = async (request: Request, response: Respo
             })
         }
 
-        console.log("where:", where)
-
         const products = await getAllProductsService({
             where,
             limit: Number(limit),
