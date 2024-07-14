@@ -15,7 +15,7 @@ export const getAllProductsLogsController = async (request: Request, response: R
             limit: Number(limit),
             offset: Number(offset),
             order: [["createdAt", "DESC"]],
-            attributes: ["uuid", "product", "createdAt"]
+            attributes: ["uuid", "products", "createdAt"]
         })
 
         response.status(200).json({

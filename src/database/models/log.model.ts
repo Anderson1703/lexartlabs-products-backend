@@ -7,7 +7,7 @@ export const Log = sequelize.define("logs", {
         allowNull: false,
         unique: true
     },
-    product:{
+    products:{
         type: STRING,
         allowNull: false
     }
