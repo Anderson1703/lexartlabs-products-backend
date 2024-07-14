@@ -8,14 +8,14 @@ export const deleteAllProductsService = async (options: DestroyOptions) => {
     try {
 
         const products = await getAllProductsLogsService({});
-        
+
         if (products.length === 0) Promise.reject({ message: 'No products to delete', status: 404 });
 
         await Product.destroy(options);
 
         const uuid = generateUUID();
 
-        await createProductLogService(uuid, {products: JSON.stringify(products)})
+        await createProductLogService(uuid, { products: products })
 
     } catch (error) {
 

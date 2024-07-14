@@ -1,3 +1,3 @@
 export interface CreateProductLogBodyI{
-    products: string
+    products: Array<any>
 }

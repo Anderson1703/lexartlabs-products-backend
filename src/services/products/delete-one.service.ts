@@ -17,7 +17,7 @@ export const deleteOneProductService = async (options: DestroyOptions) => {
 
         const uuid = generateUUID();
 
-        await createProductLogService(uuid, {products: JSON.stringify([product])})
+        await createProductLogService(uuid, { products: [product] })
 
     } catch (error) {
 
