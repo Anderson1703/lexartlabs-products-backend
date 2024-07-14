@@ -1,4 +1,4 @@
-import { ARRAY, STRING } from "sequelize";
+import { JSONB, STRING } from "sequelize";
 import sequelize from "../connection";
 
 export const Log = sequelize.define("logs", {
@@ -8,7 +8,7 @@ export const Log = sequelize.define("logs", {
         unique: true
     },
     products:{
-        type: ARRAY,
+        type: JSONB,
         allowNull: false
     }
 })
