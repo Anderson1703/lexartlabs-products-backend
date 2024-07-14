@@ -1,20 +1,39 @@
 import { Request, Response } from 'express';
 import { getAllProductsService } from '../../services/products/get-all.service';
+import { Op, WhereOptions } from 'sequelize';
 
 export const getAllProductsController = async (request: Request, response: Response) => {
     try {
 
-        const { limit, offset } = request.query
+        const { limit, offset, priceFrom, priceTo, releaseDate } = request.query;
+
+        let where: WhereOptions<any> = {}
 
         if (!limit || !offset) throw {
             status: 400,
             message: "Missing query parameters: limit and offset are required"
         }
 
+        where = {
+            ...((priceFrom && priceTo) && {
+                price: {
+                    [Op.gte]: Number(priceFrom),
+                    [Op.lte]: Number(priceTo)
+                }
+            }),
+            ...((releaseDate) && {
+                release_date: {
+                    [Op.gte]: new Date(releaseDate as string)
+                }
+            })
+        }
+
         const products = await getAllProductsService({
+            where,
             limit: Number(limit),
             offset: Number(offset),
-            attributes: ["uuid", "name", "description", "price", "stock", "release_date"]
+            order: [["createdAt", "DESC"]],
+            attributes: ["uuid", "name", "description", "price", "stock", "release_date", "createdAt"]
         })
 
         response.status(200).json({

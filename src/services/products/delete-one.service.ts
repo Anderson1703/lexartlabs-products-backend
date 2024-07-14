@@ -1,8 +1,11 @@
-import { FindOptions } from "sequelize"
+import { DestroyOptions } from "sequelize"
 import { Product } from "../../database/models/product.model"
+import { createProductLogService } from "../products-logs/create.service";
+import { generateUUID } from "../../utils/uuid.utils";
 
-export const deleteOneProductService = async (options: FindOptions) => {
+export const deleteOneProductService = async (options: DestroyOptions) => {
     try {
+
         const product = await Product.findOne(options);
 
         if (!product) throw {
@@ -11,6 +14,10 @@ export const deleteOneProductService = async (options: FindOptions) => {
         }
 
         await product.destroy();
+
+        const uuid = generateUUID();
+
+        await createProductLogService(uuid, {product: JSON.stringify(product)})
 
     } catch (error) {
 
