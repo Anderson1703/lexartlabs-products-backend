@@ -15,18 +15,16 @@ export const getAllProductsController = async (request: Request, response: Respo
         }
 
         where = {
+            ...(releaseDate && { release_date: new Date(releaseDate as string) }),
             ...((priceFrom && priceTo) && {
                 price: {
                     [Op.gte]: Number(priceFrom),
                     [Op.lte]: Number(priceTo)
                 }
-            }),
-            ...((releaseDate) && {
-                release_date: {
-                    [Op.gte]: new Date(releaseDate as string)
-                }
             })
         }
+
+        console.log("where:", where)
 
         const products = await getAllProductsService({
             where,
