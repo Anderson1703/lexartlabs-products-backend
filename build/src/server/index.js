@@ -16,7 +16,7 @@ server.use(express_1.default.urlencoded({ extended: true }));
 server.use(express_1.default.json());
 server.use('/api', index_1.default);
 server.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));
-server.get('/', (res) => {
+server.get('/', (req, res) => {
     res.redirect('/api');
 });
 exports.default = server;

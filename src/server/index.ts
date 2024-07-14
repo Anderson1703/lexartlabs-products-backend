@@ -1,4 +1,4 @@
-import express, { Response } from 'express';
+import express, { Response, Request } from 'express';
 import root from '../routes/index'
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
@@ -14,7 +14,7 @@ server.use(express.json())
 server.use('/api', root);
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-server.get('/', (res: Response) => {
+server.get('/', (req: Request, res: Response) => {
     res.redirect('/api');
 });
 
