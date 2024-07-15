@@ -23,7 +23,7 @@ export const createProductController = async (request: Request, response: Respon
 
         } else {
             throw {
-                status: 406,
+                status: 400,
                 message: "Server is missing properties"
             };
         }
