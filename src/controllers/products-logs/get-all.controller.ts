@@ -3,17 +3,8 @@ import { getAllProductsLogsService } from '../../services/products-logs/get-all.
 
 export const getAllProductsLogsController = async (request: Request, response: Response) => {
     try {
-
-        const { limit, offset } = request.query;
-
-        if (!limit || !offset) throw {
-            status: 400,
-            message: "Missing query parameters: limit and offset are required"
-        }
-
+        
         const productsLogs = await getAllProductsLogsService({
-            limit: Number(limit),
-            offset: Number(offset),
             order: [["createdAt", "DESC"]],
             attributes: ["uuid", "products", "createdAt"]
         })
