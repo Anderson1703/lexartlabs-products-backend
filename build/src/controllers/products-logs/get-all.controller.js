@@ -13,15 +13,7 @@ exports.getAllProductsLogsController = void 0;
 const get_all_service_1 = require("../../services/products-logs/get-all.service");
 const getAllProductsLogsController = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { limit, offset } = request.query;
-        if (!limit || !offset)
-            throw {
-                status: 400,
-                message: "Missing query parameters: limit and offset are required"
-            };
         const productsLogs = yield (0, get_all_service_1.getAllProductsLogsService)({
-            limit: Number(limit),
-            offset: Number(offset),
             order: [["createdAt", "DESC"]],
             attributes: ["uuid", "products", "createdAt"]
         });
