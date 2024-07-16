@@ -27,7 +27,7 @@ const createProductController = (request, response) => __awaiter(void 0, void 0,
         }
         else {
             throw {
-                status: 406,
+                status: 400,
                 message: "Server is missing properties"
             };
         }
